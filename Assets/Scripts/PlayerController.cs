@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody2D carRb;
+    //private Vector2 moveDirection = Vector2.up;
     private Vector2 startTouchPosition; //стартовая позиция касания
     private Vector2 endTouchPosition; //конечная позиция касания
     private bool isDragging = false; //палец на экране?
-    private float swipeThreshold = 70f; // эггара кеззигаг1а хьокам д1ахьакха беза моттиг
+    private float swipeThreshold = 100f; // эггара кеззигаг1а хьокам д1ахьакха беза моттиг
 
     private Camera cam;
     private float screenHeight;
@@ -36,8 +37,9 @@ public class PlayerController : MonoBehaviour
         bottomBound = cam.transform.position.y - screenHeight / 2;
         topBound = cam.transform.position.y + screenHeight / 2;
         carAudioSource = GetComponent<AudioSource>();
-    }
 
+        carRb = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
 #if UNITY_EDITOR
@@ -46,10 +48,13 @@ public class PlayerController : MonoBehaviour
 #elif UNITY_ANDROID
         MobileInput();
 #endif
-
-        MoveCarForward();
+        
         TeleportToOpposideSide();
         //carAudioSource.PlayOneShot(engineSound);
+    }
+    private void FixedUpdate()
+    {
+        MoveCarForward();
     }
     void MobileInput()
     {
@@ -102,10 +107,12 @@ public class PlayerController : MonoBehaviour
                 if (swipeDelta.x > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 90)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 90);
+                    //moveDirection = Vector2.right;
                 }
                 if (swipeDelta.x < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, -90)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, -90);
+                    //moveDirection = Vector2.left;
                 }
             }
             else
@@ -113,11 +120,12 @@ public class PlayerController : MonoBehaviour
                 if (swipeDelta.y > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 180)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 180);
+                    //moveDirection = Vector2.up;
                 }
                 if (swipeDelta.y < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 0)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
-
+                    //moveDirection= Vector2.down;
                 }
             }
         }
@@ -138,7 +146,10 @@ public class PlayerController : MonoBehaviour
     }
     void MoveCarForward()
     {
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        //carRb.linearVelocity = moveDirection * speed;
+        //carRb.MovePosition(carRb.position + moveDirection * speed * Time.fixedDeltaTime);
+        transform.Translate(Vector2.down * speed * Time.fixedDeltaTime);
+
         if (isBoosted)
         {
             if (carAudioSource.clip != boostedMotorSound || !carAudioSource.isPlaying)

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cargo
   - Wagon
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
