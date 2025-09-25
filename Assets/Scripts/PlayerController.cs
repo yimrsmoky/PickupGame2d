@@ -4,6 +4,8 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameManager gameManager;
+
     private Rigidbody2D carRb;
     //private Vector2 moveDirection = Vector2.up;
     private Vector2 startTouchPosition; //стартовая позиция касания
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
+
         cam = Camera.main;
         screenHeight = 2f * cam.orthographicSize;
         screenWidth = screenHeight * cam.aspect;
@@ -104,27 +108,29 @@ public class PlayerController : MonoBehaviour
 
             if (IsHorizontalSwipe)
             {
+                if (gameManager.isPaused) return;
+
                 if (swipeDelta.x > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 90)) != 180)
                 {
-                    transform.rotation = Quaternion.Euler(0, 0, 90);
+                    transform.rotation = Quaternion.Euler(0, 0, -90);
                     //moveDirection = Vector2.right;
                 }
                 if (swipeDelta.x < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, -90)) != 180)
                 {
-                    transform.rotation = Quaternion.Euler(0, 0, -90);
+                    transform.rotation = Quaternion.Euler(0, 0, 90);
                     //moveDirection = Vector2.left;
                 }
             }
             else
             {
-                if (swipeDelta.y > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 180)) != 180)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 180);
-                    //moveDirection = Vector2.up;
-                }
-                if (swipeDelta.y < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 0)) != 180)
+                if (swipeDelta.y > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 0)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
+                    //moveDirection = Vector2.up;
+                }
+                if (swipeDelta.y < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 180)) != 180)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 180);
                     //moveDirection= Vector2.down;
                 }
             }
@@ -148,7 +154,7 @@ public class PlayerController : MonoBehaviour
     {
         //carRb.linearVelocity = moveDirection * speed;
         //carRb.MovePosition(carRb.position + moveDirection * speed * Time.fixedDeltaTime);
-        transform.Translate(Vector2.down * speed * Time.fixedDeltaTime);
+        transform.Translate(Vector2.up * speed * Time.fixedDeltaTime);
 
         if (isBoosted)
         {

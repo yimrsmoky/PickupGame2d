@@ -18,5 +18,6 @@ public class CargoPickup : MonoBehaviour
     {
         Destroy(gameObject);
         gameManager.AddScore(1);
+        gameManager.SpawnCargo();
     }
 }
