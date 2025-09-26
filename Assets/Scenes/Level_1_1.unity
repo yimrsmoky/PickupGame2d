@@ -328,7 +328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -104.7, y: 60}
+  m_AnchoredPosition: {x: -104.7, y: 1600}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &175180015
@@ -475,9 +475,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 644690406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -58.599976, y: -51.19995}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -58.599976, y: 65}
   m_SizeDelta: {x: 50, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &190668372
@@ -1455,7 +1455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 132.90002, y: -55.600098}
+  m_AnchoredPosition: {x: 132.90002, y: -150}
   m_SizeDelta: {x: 211.3, y: 57.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &675943404
@@ -1701,6 +1701,7 @@ MonoBehaviour:
   pausePanel: {fileID: 112274874}
   pauseButton: {fileID: 190668372}
   scoreText: {fileID: 675943404}
+  isPaused: 0
 --- !u!1 &973880441
 GameObject:
   m_ObjectHideFlags: 0
