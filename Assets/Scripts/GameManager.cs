@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject startPanel;
     public GameObject pausePanel;
+    public GameObject gameOverPanel;
     public Button pauseButton;
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private float distanceToCar = 2f;
     private int score = 0;
+    public int lifes;
 
     public bool isStarted;
     public bool isPaused;
@@ -42,8 +45,9 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    public void StartGame(int lifes)
+    public void StartGame(int startLifes)
     {
+        lifes = startLifes;
         startPanel.gameObject.SetActive(false);
 
         pauseButton.gameObject.SetActive(true);
@@ -91,6 +95,11 @@ public class GameManager : MonoBehaviour
         score += scoreToAdd;
         scoreText.text = $"Score: {score}";
     }
+    public void UpdateLifes(int lifesToRemove)
+    {
+        lifes -= lifesToRemove;
+        lifesText.text = $"{lifes}";
+    }
     public void PauseGame()
     {
         if (!isPaused)
@@ -109,5 +118,14 @@ public class GameManager : MonoBehaviour
             pauseButton.gameObject.SetActive(true);
             pausePanel.gameObject.SetActive(false);
         }
+    }
+    public void GameOver()
+    {
+        gameOverPanel.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
