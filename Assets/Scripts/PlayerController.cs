@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private float normalSpeed = 1f;
     [SerializeField] private float boostedSpeed = 2f;
-    private bool isBoosted = false;
+    private bool isBoosted;
 
     void Start()
     {
@@ -58,7 +58,10 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        MoveCarForward();
+        if (gameManager.isStarted)
+        {
+            MoveCarForward();
+        }
     }
     void MobileInput()
     {
@@ -96,7 +99,13 @@ public class PlayerController : MonoBehaviour
     }
     void ProcessSwipe()
     {
+
         Vector2 swipeDelta = endTouchPosition - startTouchPosition; //хокхавалар чакхдалара е из доладалара е юкъара юкъ
+        bool isStarted = gameManager.isStarted;
+        bool isPaused = gameManager.isPaused;
+
+        if (!isStarted || isPaused) return;
+
         //свайпи йоахал мишт я хьожа вай
         if (swipeDelta.magnitude >= swipeThreshold)
         {
@@ -108,14 +117,12 @@ public class PlayerController : MonoBehaviour
 
             if (IsHorizontalSwipe)
             {
-                if (gameManager.isPaused) return;
-
-                if (swipeDelta.x > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 90)) != 180)
+                if (swipeDelta.x > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, -90)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, -90);
                     //moveDirection = Vector2.right;
                 }
-                if (swipeDelta.x < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, -90)) != 180)
+                if (swipeDelta.x < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 90)) != 180)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 90);
                     //moveDirection = Vector2.left;
@@ -140,11 +147,13 @@ public class PlayerController : MonoBehaviour
             //клик
                 if (isBoosted)
                 {
+                Debug.Log("deboost");
                     isBoosted = false;
                     speed = normalSpeed;
                 }
                 else
                 {
+                Debug.Log("Boost");
                     isBoosted = true;
                     speed = boostedSpeed;
                 }

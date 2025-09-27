@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,13 +16,17 @@ public class GameManager : MonoBehaviour
     public GameObject cargoPrefab;
     private GameObject currentCargo;
 
+    public GameObject startPanel;
     public GameObject pausePanel;
     public Button pauseButton;
+    public Image lifesImg;
+    public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
 
     private float distanceToCar = 2f;
     private int score = 0;
 
+    public bool isStarted;
     public bool isPaused;
     private void Awake()
     {
@@ -31,14 +36,32 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
-        SpawnCargo();
-        AddScore(0);
+
     }
     void Update()
     {
- 
-    }
 
+    }
+    public void StartGame(int lifes)
+    {
+        startPanel.gameObject.SetActive(false);
+
+        pauseButton.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
+        lifesImg.gameObject.SetActive(true);
+
+        lifesText.text = $"{lifes}";
+
+        SpawnCargo();
+        AddScore(0);
+
+        StartCoroutine(StartGameWithDelay());
+    }
+    IEnumerator StartGameWithDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isStarted = true;
+    }
     public void SpawnCargo ()
     {
         if (currentCargo != null)
