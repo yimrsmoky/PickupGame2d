@@ -3,6 +3,8 @@ using UnityEngine;
 public class Obstacles : MonoBehaviour
 {
     private GameManager gameManager;
+
+    public AudioClip crashSound;
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -15,6 +17,14 @@ public class Obstacles : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        gameManager.UpdateLifes(1);
+        gameManager.audioSource.PlayOneShot(crashSound);
+        if (gameManager.lifes == 1)
+        {
+            gameManager.GameOver();
+        }
+        else
+        {
+            gameManager.UpdateLifes(1);
+        }
     }
 }

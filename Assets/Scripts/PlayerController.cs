@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
 
     private Rigidbody2D carRb;
+    public SpriteRenderer carSprRenderer;
     //private Vector2 moveDirection = Vector2.up;
     private Vector2 startTouchPosition; //стартовая позиция касания
     private Vector2 endTouchPosition; //конечная позиция касания
@@ -43,16 +45,19 @@ public class PlayerController : MonoBehaviour
         carAudioSource = GetComponent<AudioSource>();
 
         carRb = GetComponent<Rigidbody2D>();
+        carSprRenderer = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
 #if UNITY_EDITOR
-        PCInput();
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+            PCInput();
 
 #elif UNITY_ANDROID
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         MobileInput();
 #endif
-        
+
         TeleportToOpposideSide();
         //carAudioSource.PlayOneShot(engineSound);
     }
@@ -101,10 +106,9 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector2 swipeDelta = endTouchPosition - startTouchPosition; //хокхавалар чакхдалара е из доладалара е юкъара юкъ
-        bool isStarted = gameManager.isStarted;
         bool isPaused = gameManager.isPaused;
-
-        if (!isStarted || isPaused) return;
+        bool isStarted = gameManager.isStarted;
+        if (isPaused || !isStarted) return;
 
         //свайпи йоахал мишт я хьожа вай
         if (swipeDelta.magnitude >= swipeThreshold)
@@ -147,13 +151,11 @@ public class PlayerController : MonoBehaviour
             //клик
                 if (isBoosted)
                 {
-                Debug.Log("deboost");
                     isBoosted = false;
                     speed = normalSpeed;
                 }
                 else
                 {
-                Debug.Log("Boost");
                     isBoosted = true;
                     speed = boostedSpeed;
                 }

@@ -8,10 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private PlayerController playerController;
     private Transform[] spawnPoints;
     public Transform carTransform;
+    public Transform carRespawnTransform;
 
     public AudioSource audioSource;
+
+    public AudioClip gameOverSound;
+    public AudioClip startSound;
 
     public GameObject spawnPointsContainer;
     public GameObject cargoPrefab;
@@ -24,13 +29,16 @@ public class GameManager : MonoBehaviour
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI startText;
 
     private float distanceToCar = 2f;
+    private float respawnBlinkTime = 1.5f;
+    private float respawnBlinkInterval = 0.1f;
     private int score = 0;
     public int lifes;
 
+    public bool isPaused = true;
     public bool isStarted;
-    public bool isPaused;
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
@@ -39,7 +47,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
-
+        playerController = FindFirstObjectByType<PlayerController>();
     }
     void Update()
     {
@@ -47,6 +55,8 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame(int startLifes)
     {
+        isPaused = false;
+
         lifes = startLifes;
         startPanel.gameObject.SetActive(false);
 
@@ -63,7 +73,10 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator StartGameWithDelay()
     {
-        yield return new WaitForSeconds(0.1f);
+        startText.gameObject.SetActive(true);
+        audioSource.PlayOneShot(startSound);
+        yield return new WaitForSeconds(1f);
+        startText.gameObject.SetActive(false);
         isStarted = true;
     }
     public void SpawnCargo ()
@@ -99,6 +112,8 @@ public class GameManager : MonoBehaviour
     {
         lifes -= lifesToRemove;
         lifesText.text = $"{lifes}";
+
+        StartCoroutine(RespawnCarWithBlink());
     }
     public void PauseGame()
     {
@@ -119,9 +134,27 @@ public class GameManager : MonoBehaviour
             pausePanel.gameObject.SetActive(false);
         }
     }
+    public IEnumerator RespawnCarWithBlink()
+    {
+        float timer = 0f;
+        SpriteRenderer carSprR = playerController.carSprRenderer;
+        carTransform.position = carRespawnTransform.position;
+        carTransform.rotation = carRespawnTransform.rotation;
+        while (timer < respawnBlinkTime)
+        {
+            carSprR.enabled = !carSprR.enabled;
+            yield return new WaitForSeconds(respawnBlinkInterval);
+
+            timer += respawnBlinkInterval;
+        }
+        carSprR.enabled = true;
+    }
     public void GameOver()
     {
+        isPaused = true;
         gameOverPanel.gameObject.SetActive(true);
+        audioSource.Stop();
+        audioSource.PlayOneShot(gameOverSound);
         Time.timeScale = 0f;
     }
     public void RestartGame()
