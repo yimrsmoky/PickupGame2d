@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 300;
         gameManager = FindFirstObjectByType<GameManager>();
 
         cam = Camera.main;

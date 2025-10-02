@@ -5,27 +5,32 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     private PlayerController playerController;
     private Transform[] spawnPoints;
     public Transform carTransform;
     public Transform carRespawnTransform;
 
-    public AudioSource audioSource;
+    private AudioSource audioSource;
 
     public AudioClip gameOverSound;
     public AudioClip startSound;
+    public AudioClip levelCompletedSound;
 
     public GameObject spawnPointsContainer;
     public GameObject cargoPrefab;
     private GameObject currentCargo;
 
     public GameObject startPanel;
-    public GameObject pausePanel;
+    private GameObject pausePanel;
     public GameObject gameOverPanel;
-    public Button pauseButton;
+    public GameObject levelCompletedPanel;
+    private Button pauseButton;
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
@@ -34,24 +39,34 @@ public class GameManager : MonoBehaviour
     private float distanceToCar = 2f;
     private float respawnBlinkTime = 1.5f;
     private float respawnBlinkInterval = 0.1f;
-    private int score = 0;
+    public int score = 0;
+    public int scoreToWin;
     public int lifes;
 
     public bool isPaused = true;
     public bool isStarted;
-    private void Awake()
+    void Awake()
     {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = -1;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+       audioSource = GameObject.FindFirstObjectByType<AudioSource>();
     }
     void Start()
     {
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
         playerController = FindFirstObjectByType<PlayerController>();
-    }
-    void Update()
-    {
-
     }
     public void StartGame(int startLifes)
     {
@@ -159,6 +174,16 @@ public class GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+    public void LevelCompleted()
+    {
+
+    }
+    public void ToNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartGame(lifes);
     }
 }

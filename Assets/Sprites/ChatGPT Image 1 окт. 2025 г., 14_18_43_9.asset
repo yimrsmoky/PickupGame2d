@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TileBox
+  m_Name: "ChatGPT Image 1 \u043E\u043A\u0442. 2025 \u0433., 14_18_43_9"
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1878592897818529697, guid: b545b7e698a70a145af2aeb89a29ef08, type: 3}
+  m_Sprite: {fileID: -5961339129509135791, guid: d509c3d3d482f8e4abfbcf990aff8bb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -19,9 +19,19 @@ public class CargoPickup : MonoBehaviour
     }
     void CollectCargo()
     {
+        int score = gameManager.score;
+        int scoreToWin = gameManager.scoreToWin;
         Destroy(gameObject);
         gameManager.audioSource.PlayOneShot(pickupSound);
         gameManager.AddScore(1);
-        gameManager.SpawnCargo();
+        if (score == scoreToWin)
+        {
+            //gameManager.LevelCompleted();
+            gameManager.ToNextLevel();
+        }
+        else if (score != scoreToWin)
+        {
+            gameManager.SpawnCargo();
+        }
     }
 }
