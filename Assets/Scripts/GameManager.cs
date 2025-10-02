@@ -1,11 +1,9 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,24 +11,26 @@ public class GameManager : MonoBehaviour
 
     private PlayerController playerController;
     private Transform[] spawnPoints;
-    public Transform carTransform;
-    public Transform carRespawnTransform;
+    private Transform carTransform;
+    private Transform carRespawnTransform;
 
     private AudioSource audioSource;
 
     public AudioClip gameOverSound;
     public AudioClip startSound;
     public AudioClip levelCompletedSound;
+    public AudioClip crashSound;
+    public AudioClip pickupSound;
 
-    public GameObject spawnPointsContainer;
+    private GameObject spawnPointsContainer;
     public GameObject cargoPrefab;
     private GameObject currentCargo;
 
     public GameObject startPanel;
-    private GameObject pausePanel;
+    public GameObject pausePanel;
     public GameObject gameOverPanel;
     public GameObject levelCompletedPanel;
-    private Button pauseButton;
+    public Button pauseButton;
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
@@ -61,12 +61,17 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-       audioSource = GameObject.FindFirstObjectByType<AudioSource>();
-    }
-    void Start()
-    {
-        spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
+        audioSource = GameObject.FindFirstObjectByType<AudioSource>();
         playerController = FindFirstObjectByType<PlayerController>();
+        carTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        carRespawnTransform = GameObject.Find("CarRespawnPoint").transform;
+        spawnPointsContainer = GameObject.Find("SpawnPoints");
+        spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
+
+        if (SceneManager.GetActiveScene().buildIndex !=0)
+        {
+            StartGame(lifes);
+        }
     }
     public void StartGame(int startLifes)
     {
@@ -82,7 +87,7 @@ public class GameManager : MonoBehaviour
         lifesText.text = $"{lifes}";
 
         SpawnCargo();
-        AddScore(0);
+        AddScore(-score);
 
         StartCoroutine(StartGameWithDelay());
     }
@@ -94,7 +99,7 @@ public class GameManager : MonoBehaviour
         startText.gameObject.SetActive(false);
         isStarted = true;
     }
-    public void SpawnCargo ()
+    public void SpawnCargo()
     {
         if (currentCargo != null)
         {
@@ -102,7 +107,7 @@ public class GameManager : MonoBehaviour
         }
         List<Transform> validSpawnPoints = new List<Transform>();
 
-        foreach ( var point in spawnPoints)
+        foreach (var point in spawnPoints)
         {
             bool isTooCloseToPlayer = Vector2.Distance(point.transform.position, carTransform.position) < distanceToCar;
 
@@ -118,7 +123,7 @@ public class GameManager : MonoBehaviour
             currentCargo = Instantiate(cargoPrefab, validSpawnPoints[randomIndex].position, Quaternion.identity);
         }
     }
-    public void AddScore (int scoreToAdd)
+    public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = $"Score: {score}";
@@ -129,6 +134,32 @@ public class GameManager : MonoBehaviour
         lifesText.text = $"{lifes}";
 
         StartCoroutine(RespawnCarWithBlink());
+    }
+    public void CollectCargo()
+    {
+        audioSource.PlayOneShot(pickupSound);
+        AddScore(1);
+        if (score == scoreToWin)
+        {
+            //gameManager.LevelCompleted();
+            ToNextLevel();
+        }
+        else
+        {
+            SpawnCargo();
+        }
+    }
+    public void TouchingAnObstacle()
+    {
+        audioSource.PlayOneShot(crashSound);
+        if (lifes == 1)
+        {
+            GameOver();
+        }
+        else
+        {
+            UpdateLifes(1);
+        }
     }
     public void PauseGame()
     {
@@ -141,7 +172,7 @@ public class GameManager : MonoBehaviour
             pausePanel.gameObject.SetActive(true);
         }
         else
-        { 
+        {
             isPaused = false;
             Time.timeScale = 1f;
             audioSource.UnPause();
@@ -184,6 +215,5 @@ public class GameManager : MonoBehaviour
     public void ToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        StartGame(lifes);
     }
 }

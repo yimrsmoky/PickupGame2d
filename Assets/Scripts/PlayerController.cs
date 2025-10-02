@@ -5,7 +5,6 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameManager gameManager;
 
     private Rigidbody2D carRb;
     public SpriteRenderer carSprRenderer;
@@ -34,7 +33,6 @@ public class PlayerController : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
-        gameManager = FindFirstObjectByType<GameManager>();
 
         cam = Camera.main;
         screenHeight = 2f * cam.orthographicSize;
@@ -65,7 +63,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (gameManager.isStarted)
+        if (GameManager.Instance.isStarted)
         {
             MoveCarForward();
         }
@@ -108,8 +106,8 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector2 swipeDelta = endTouchPosition - startTouchPosition; //хокхавалар чакхдалара е из доладалара е юкъара юкъ
-        bool isPaused = gameManager.isPaused;
-        bool isStarted = gameManager.isStarted;
+        bool isPaused = GameManager.Instance.isPaused;
+        bool isStarted = GameManager.Instance.isStarted;
         if (isPaused || !isStarted) return;
 
         //свайпи йоахал мишт я хьожа вай
