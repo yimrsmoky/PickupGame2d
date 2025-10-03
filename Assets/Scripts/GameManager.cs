@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI startText;
+    public TextMeshProUGUI stageText;
 
     private float distanceToCar = 2f;
     private float respawnBlinkTime = 1.5f;
@@ -78,12 +79,12 @@ public class GameManager : MonoBehaviour
         isPaused = false;
 
         lifes = startLifes;
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         startPanel.gameObject.SetActive(false);
 
-        pauseButton.gameObject.SetActive(true);
-        scoreText.gameObject.SetActive(true);
-        lifesImg.gameObject.SetActive(true);
+        ShowExcessUI();
 
+        stageText.text = $"LEVEL {sceneIndex+1}/30";
         lifesText.text = $"{lifes}";
 
         SpawnCargo();
@@ -141,8 +142,7 @@ public class GameManager : MonoBehaviour
         AddScore(1);
         if (score == scoreToWin)
         {
-            //gameManager.LevelCompleted();
-            ToNextLevel();
+            LevelCompleted();
         }
         else
         {
@@ -199,6 +199,7 @@ public class GameManager : MonoBehaviour
     {
         isPaused = true;
         gameOverPanel.gameObject.SetActive(true);
+        HideExcessUI();
         audioSource.Stop();
         audioSource.PlayOneShot(gameOverSound);
         Time.timeScale = 0f;
@@ -210,10 +211,27 @@ public class GameManager : MonoBehaviour
     }
     public void LevelCompleted()
     {
-
+        isStarted = false;
+        levelCompletedPanel.gameObject.SetActive(true);
+        HideExcessUI();
+        audioSource.Stop();
+        audioSource.PlayOneShot(levelCompletedSound);
     }
     public void ToNextLevel()
     {
+        levelCompletedPanel.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    void HideExcessUI()
+    {
+        pauseButton.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
+        lifesImg.gameObject.SetActive(false);
+    }
+    void ShowExcessUI()
+    {
+        pauseButton.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
+        lifesImg.gameObject.SetActive(true);
     }
 }
