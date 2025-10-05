@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.text = $"Score: {score}";
+        scoreText.text = $"Progress: {score}/{scoreToWin}";
     }
     public void UpdateLifes(int lifesToRemove)
     {

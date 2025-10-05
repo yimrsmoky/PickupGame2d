@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     public float offset = 1f;
     private float leftBound, rightBound, topBound, bottomBound;
 
-    private Quaternion targetRotation;
-
     private AudioSource carAudioSource;
     public AudioClip normalMotorSound;
     public AudioClip boostedMotorSound;
@@ -42,8 +40,6 @@ public class PlayerController : MonoBehaviour
         bottomBound = cam.transform.position.y - screenHeight / 2;
         topBound = cam.transform.position.y + screenHeight / 2;
         carAudioSource = GetComponent<AudioSource>();
-
-        targetRotation = transform.rotation;
     }
     void Update()
     {
@@ -56,7 +52,6 @@ public class PlayerController : MonoBehaviour
         MobileInput();
 #endif
 
-        RotateCar();
         TeleportToOpposideSide();
     }
     private void FixedUpdate()
@@ -121,22 +116,22 @@ public class PlayerController : MonoBehaviour
             {
                 if (swipeDelta.x > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, -90)) != 180)
                 {
-                    targetRotation = Quaternion.Euler(0, 0, -90);
+                    transform.rotation = Quaternion.Euler(0, 0, -90);
                 }
                 if (swipeDelta.x < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 90)) != 180)
                 {
-                    targetRotation = Quaternion.Euler(0, 0, 90);
+                    transform.rotation = Quaternion.Euler(0, 0, 90);
                 }
             }
             else
             {
                 if (swipeDelta.y > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 0)) != 180)
                 {
-                    targetRotation = Quaternion.Euler(0, 0, 0);
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
                 if (swipeDelta.y < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 180)) != 180)
                 {
-                    targetRotation = Quaternion.Euler(0, 0, 180);
+                    transform.rotation = Quaternion.Euler(0, 0, 180);
                 }
             }
         }
@@ -175,10 +170,6 @@ public class PlayerController : MonoBehaviour
                 carAudioSource.Play();
             }
         }
-    }
-    void RotateCar()
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
     }
     void TeleportToOpposideSide()
     {
