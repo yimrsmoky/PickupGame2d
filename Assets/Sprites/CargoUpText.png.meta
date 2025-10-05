@@ -1,10 +1,28 @@
 fileFormatVersion: 2
-guid: dfdd24f2d789eea4c9de0936a15c285d
+guid: 94bc98b59fce07248bc2aea245c2619f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1421666575214904608
-    second: "ChatGPT Image 26 \u0441\u0435\u043D\u0442. 2025 \u0433., 23_32_44_0"
+      213: -755941653325948865
+    second: CargoUpText_0
+  - first:
+      213: 1028398643230062099
+    second: CargoUpText_1
+  - first:
+      213: -4884972163263184028
+    second: CargoUpText_2
+  - first:
+      213: 1476062724949614799
+    second: CargoUpText_3
+  - first:
+      213: -5303225848680675642
+    second: CargoUpText_4
+  - first:
+      213: 6287155359920164625
+    second: CargoUpText_5
+  - first:
+      213: -7952492418126020250
+    second: CargoUpText_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +131,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "ChatGPT Image 26 \u0441\u0435\u043D\u0442. 2025 \u0433., 23_32_44_0"
+      name: CargoUpText_0
       rect:
         serializedVersion: 2
-        x: 83
-        y: 48
-        width: 939
-        height: 971
+        x: 0
+        y: 0
+        width: 543
+        height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0eaf44b38c9354ce0800000000000000
-      internalID: -1421666575214904608
+      spriteID: f38d59a421b5285f0800000000000000
+      internalID: -755941653325948865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CargoUpText_5
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 0
+        width: 249
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11f0cb33d76704750800000000000000
+      internalID: 6287155359920164625
       vertices: []
       indices: 
       edges: []
@@ -138,7 +178,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 23e6477ecec5eb54eb2b2f9fdd6ae05d
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +188,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "ChatGPT Image 26 \u0441\u0435\u043D\u0442. 2025 \u0433., 23_32_44_0": -1421666575214904608
+      CargoUpText_0: -755941653325948865
+      CargoUpText_1: 1028398643230062099
+      CargoUpText_2: -4884972163263184028
+      CargoUpText_3: 1476062724949614799
+      CargoUpText_4: -5303225848680675642
+      CargoUpText_5: 6287155359920164625
+      CargoUpText_6: -7952492418126020250
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

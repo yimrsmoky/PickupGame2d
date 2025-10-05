@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     private Transform carTransform;
     private Transform carRespawnTransform;
 
+    private SpriteRenderer carSprRenderer;
+
     private AudioSource audioSource;
 
     public AudioClip gameOverSound;
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         audioSource = GameObject.FindFirstObjectByType<AudioSource>();
         playerController = FindFirstObjectByType<PlayerController>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
         carRespawnTransform = GameObject.Find("CarRespawnPoint").transform;
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
@@ -183,17 +186,16 @@ public class GameManager : MonoBehaviour
     public IEnumerator RespawnCarWithBlink()
     {
         float timer = 0f;
-        SpriteRenderer carSprR = playerController.carSprRenderer;
         carTransform.position = carRespawnTransform.position;
         carTransform.rotation = carRespawnTransform.rotation;
         while (timer < respawnBlinkTime)
         {
-            carSprR.enabled = !carSprR.enabled;
+            carSprRenderer.enabled = !carSprRenderer.enabled;
             yield return new WaitForSeconds(respawnBlinkInterval);
 
             timer += respawnBlinkInterval;
         }
-        carSprR.enabled = true;
+        carSprRenderer.enabled = true;
     }
     public void GameOver()
     {
