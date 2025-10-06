@@ -208,8 +208,11 @@ public class GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        Time.timeScale = 1f;
+        isStarted = false;
+        pausePanel.gameObject.SetActive(false);
+        startPanel.gameObject.SetActive(true);
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
     public void LevelCompleted()
     {
