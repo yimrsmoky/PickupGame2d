@@ -190,6 +190,7 @@ public class GameManager : MonoBehaviour
         carTransform.rotation = carRespawnTransform.rotation;
         while (timer < respawnBlinkTime)
         {
+            if (isPaused || !isStarted) yield break;
             carSprRenderer.enabled = !carSprRenderer.enabled;
             yield return new WaitForSeconds(respawnBlinkInterval);
 
@@ -211,6 +212,7 @@ public class GameManager : MonoBehaviour
         isStarted = false;
         pausePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
+        gameOverPanel.gameObject.SetActive(false);
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
