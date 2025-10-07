@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject cargoPrefab;
     private GameObject currentCargo;
 
+    public GameObject languagePanel;
     public GameObject startPanel;
     public GameObject pausePanel;
     public GameObject gameOverPanel;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
     private float distanceToCar = 2f;
     private float respawnBlinkTime = 1.5f;
     private float respawnBlinkInterval = 0.1f;
+    public float gameTimer;
     public int score = 0;
     public int scoreToWin;
     public int lifes;
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
 
-        if (SceneManager.GetActiveScene().buildIndex !=0)
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             StartGame(lifes);
         }
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
 
         ShowExcessUI();
 
-        stageText.text = $"LEVEL {sceneIndex+1}/30";
+        //stageText.text = $"{sceneIndex + 1}/30";
         lifesText.text = $"{lifes}";
 
         SpawnCargo();
@@ -130,7 +132,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.text = $"Progress: {score}/{scoreToWin}";
+        //scoreText.text = $"Progress: {score}/{scoreToWin}";
     }
     public void UpdateLifes(int lifesToRemove)
     {
@@ -240,5 +242,15 @@ public class GameManager : MonoBehaviour
         pauseButton.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(true);
         lifesImg.gameObject.SetActive(true);
+    }
+    public void OpenLangPanel()
+    {
+        startPanel.gameObject.SetActive(false);
+        languagePanel.gameObject.SetActive(true);
+    }
+    public void CloseLangPanel()
+    {
+        languagePanel.gameObject.SetActive(false);
+        startPanel.gameObject.SetActive(true);
     }
 }
