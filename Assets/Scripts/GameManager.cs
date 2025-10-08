@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject languagePanel;
     public GameObject startPanel;
+    public GameObject startTextPanel;
     public GameObject pausePanel;
     public GameObject gameOverPanel;
     public GameObject levelCompletedPanel;
@@ -37,13 +38,13 @@ public class GameManager : MonoBehaviour
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI startText;
     public TextMeshProUGUI stageText;
 
     private float distanceToCar = 2f;
     private float respawnBlinkTime = 1.5f;
     private float respawnBlinkInterval = 0.1f;
     public float gameTimer;
+    public int stageNumber;
     public int score = 0;
     public int scoreToWin;
     public int lifes;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         carRespawnTransform = GameObject.Find("CarRespawnPoint").transform;
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
+        stageNumber = SceneManager.GetActiveScene().buildIndex + 1;
 
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
@@ -99,10 +101,10 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator StartGameWithDelay()
     {
-        startText.gameObject.SetActive(true);
+        startTextPanel.gameObject.SetActive(true);
         audioSource.PlayOneShot(startSound);
         yield return new WaitForSeconds(1f);
-        startText.gameObject.SetActive(false);
+        startTextPanel.gameObject.SetActive(false);
         isStarted = true;
     }
     public void SpawnCargo()
@@ -212,6 +214,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         isStarted = false;
+        lifesImg.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);

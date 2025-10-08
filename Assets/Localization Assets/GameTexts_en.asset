@@ -44,7 +44,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 710035693568
-    m_Localized: 'level '
+    m_Localized: 'level: {stage-component.stageNumber}/30'
     m_Metadata:
       m_Items:
       - rid: 6306169947818557683
