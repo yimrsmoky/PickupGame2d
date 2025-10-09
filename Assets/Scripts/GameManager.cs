@@ -4,17 +4,19 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private PlayerController playerController;
+    //private PlayerController playerController;
     private Transform[] spawnPoints;
     private Transform carTransform;
     private Transform carRespawnTransform;
 
     private SpriteRenderer carSprRenderer;
+    private SpriteRenderer trunkBoxSprRenderer;
 
     private AudioSource audioSource;
 
@@ -65,12 +67,24 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+#if UNITY_ANDROID
+    private void Start()
+    {
+        if (IsFirstLaunch())
+        {
+            OpenLangPanel();
+            MarkAsLaunched();
+        }
+    }
+#endif
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         audioSource = GameObject.FindFirstObjectByType<AudioSource>();
-        playerController = FindFirstObjectByType<PlayerController>();
+        //playerController = FindFirstObjectByType<PlayerController>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
+        trunkBoxSprRenderer = GameObject.FindGameObjectWithTag("Wagon").GetComponent<SpriteRenderer>();
+        trunkBoxSprRenderer.enabled = false;
         carRespawnTransform = GameObject.Find("CarRespawnPoint").transform;
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
@@ -147,6 +161,9 @@ public class GameManager : MonoBehaviour
     {
         audioSource.PlayOneShot(pickupSound);
         AddScore(1);
+        //box enabled
+        trunkBoxSprRenderer.enabled = true;
+
         if (score == scoreToWin)
         {
             LevelCompleted();
@@ -166,6 +183,8 @@ public class GameManager : MonoBehaviour
         else
         {
             UpdateLifes(1);
+            //box disabled
+            trunkBoxSprRenderer.enabled = false;
         }
     }
     public void PauseGame()
@@ -214,6 +233,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         isStarted = false;
+        trunkBoxSprRenderer.enabled = false;
         lifesImg.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
@@ -255,5 +275,15 @@ public class GameManager : MonoBehaviour
     {
         languagePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
+    }
+    void MarkAsLaunched()
+    {
+        PlayerPrefs.SetInt("game_launched_before", 1);
+        PlayerPrefs.Save();
+    }
+    bool IsFirstLaunch()
+    {
+        // ¬озвращает true если игра запущена впервые
+        return !PlayerPrefs.HasKey("game_launched_before");
     }
 }
