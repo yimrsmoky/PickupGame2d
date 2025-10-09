@@ -1,16 +1,18 @@
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    //private PlayerController playerController;
+    private LocalizeStringEvent localizeEvent;
+
     private Transform[] spawnPoints;
     private Transform carTransform;
     private Transform carRespawnTransform;
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
         stageNumber = SceneManager.GetActiveScene().buildIndex + 1;
+        localizeEvent = scoreText.GetComponent<LocalizeStringEvent>();
 
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
@@ -148,7 +151,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        //scoreText.text = $"Progress: {score}/{scoreToWin}";
+        localizeEvent.RefreshString();
     }
     public void UpdateLifes(int lifesToRemove)
     {
@@ -235,6 +238,7 @@ public class GameManager : MonoBehaviour
         isStarted = false;
         trunkBoxSprRenderer.enabled = false;
         lifesImg.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);

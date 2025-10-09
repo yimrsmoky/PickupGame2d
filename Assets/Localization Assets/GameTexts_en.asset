@@ -49,7 +49,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6306169947818557683
   - m_Id: 912893206528
-    m_Localized: 'progress:'
+    m_Localized: 'progress: {score-component.score}'
     m_Metadata:
       m_Items:
       - rid: 6306169947818557683

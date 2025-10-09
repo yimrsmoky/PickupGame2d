@@ -49,7 +49,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6306169947818557684
   - m_Id: 912893206528
-    m_Localized: "\u0442\u043E\u043B\u0430\u043C:"
+    m_Localized: "\u0442\u043E\u043B\u0430\u043C: {score-component.score}"
     m_Metadata:
       m_Items:
       - rid: 6306169947818557684
