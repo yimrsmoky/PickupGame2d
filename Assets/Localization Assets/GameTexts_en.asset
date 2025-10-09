@@ -20,19 +20,7 @@ MonoBehaviour:
     - rid: 6306169947818557683
   m_TableData:
   - m_Id: 170509787136
-    m_Localized: choose difficulty
-    m_Metadata:
-      m_Items: []
-  - m_Id: 378245275648
-    m_Localized: easy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 432637009920
-    m_Localized: medium
-    m_Metadata:
-      m_Items: []
-  - m_Id: 495648038912
-    m_Localized: hard
+    m_Localized: difficulty
     m_Metadata:
       m_Items: []
   - m_Id: 595988373504

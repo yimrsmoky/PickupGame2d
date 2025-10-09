@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     private LocalizeStringEvent localizeEvent;
+    private LevelButton levelButton;
+    public int SelectedLevel { get; set; } = 1;
 
     private Transform[] spawnPoints;
     private Transform carTransform;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     private GameObject currentCargo;
 
     public GameObject languagePanel;
+    public GameObject levelsPanel;
     public GameObject startPanel;
     public GameObject startTextPanel;
     public GameObject pausePanel;
@@ -52,6 +55,7 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public int scoreToWin;
     public int lifes;
+    public int startLifes;
 
     public bool isPaused = true;
     public bool isStarted;
@@ -69,16 +73,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-#if UNITY_ANDROID
     private void Start()
     {
+#if UNITY_ANDROID
         if (IsFirstLaunch())
         {
             OpenLangPanel();
             MarkAsLaunched();
         }
-    }
 #endif
+
+        //SceneManager.LoadScene(PlayerPrefs.GetInt("last_selected_level"));
+    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         audioSource = GameObject.FindFirstObjectByType<AudioSource>();
@@ -95,10 +101,10 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            StartGame(lifes);
+            StartGame();
         }
     }
-    public void StartGame(int startLifes)
+    public void StartGame()
     {
         isPaused = false;
 
@@ -120,7 +126,7 @@ public class GameManager : MonoBehaviour
     {
         startTextPanel.gameObject.SetActive(true);
         audioSource.PlayOneShot(startSound);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.25f);
         startTextPanel.gameObject.SetActive(false);
         isStarted = true;
     }
@@ -242,6 +248,8 @@ public class GameManager : MonoBehaviour
         pausePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);
+
+        levelButton.UpdateAllLevelButtons();
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
@@ -250,8 +258,18 @@ public class GameManager : MonoBehaviour
         isStarted = false;
         levelCompletedPanel.gameObject.SetActive(true);
         HideExcessUI();
+        CompleteLevel(stageNumber);
         audioSource.Stop();
         audioSource.PlayOneShot(levelCompletedSound);
+    }
+    public void CompleteLevel(int level)
+    {
+        int unlocked = PlayerPrefs.GetInt("unlocked_level", 1);
+        if (level >= unlocked)
+        {
+            PlayerPrefs.SetInt("unlocked_level", level + 1);
+            PlayerPrefs.Save();
+        }
     }
     public void ToNextLevel()
     {
@@ -278,6 +296,16 @@ public class GameManager : MonoBehaviour
     public void CloseLangPanel()
     {
         languagePanel.gameObject.SetActive(false);
+        startPanel.gameObject.SetActive(true);
+    }
+    public void OpenLevelsPanel()
+    {
+        startPanel.gameObject.SetActive(false);
+        levelsPanel.gameObject.SetActive(true);
+    }
+    public void CloseLevelsPanel()
+    {
+        levelsPanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
     }
     void MarkAsLaunched()

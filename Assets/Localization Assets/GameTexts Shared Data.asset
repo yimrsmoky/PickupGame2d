@@ -19,18 +19,6 @@ MonoBehaviour:
     m_Key: choose_difficulty
     m_Metadata:
       m_Items: []
-  - m_Id: 378245275648
-    m_Key: difficulty_easy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 432637009920
-    m_Key: difficulty_medium
-    m_Metadata:
-      m_Items: []
-  - m_Id: 495648038912
-    m_Key: difficulty_hard
-    m_Metadata:
-      m_Items: []
   - m_Id: 595988373504
     m_Key: donate
     m_Metadata:

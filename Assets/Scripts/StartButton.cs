@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DifficultyButton : MonoBehaviour
+public class StartButton : MonoBehaviour
 {
-    public int difficulty;
     private GameManager gameManager;
 
     private Button button;
@@ -11,10 +11,11 @@ public class DifficultyButton : MonoBehaviour
     {
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
         button = GetComponent<Button>();
-        button.onClick.AddListener(SetDifficulty);
+        button.onClick.AddListener(OnPlayClick);
     }
-    public void SetDifficulty()
+    public void OnPlayClick()
     {
-        gameManager.StartGame(difficulty);
+        int selectedLevel = GameManager.Instance.SelectedLevel;
+        GameManager.Instance.StartGame();
     }
 }
