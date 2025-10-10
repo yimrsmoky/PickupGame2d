@@ -3405,7 +3405,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -6007857137893288414, guid: 8b5f44c090a0112439f5b75b41012474, type: 3}
+  m_Sprite: {fileID: 7282461348544508605, guid: 2c6431fbdc159d34b8977c0d82774296, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
@@ -3483,6 +3483,7 @@ MonoBehaviour:
   pickupSound: {fileID: 8300000, guid: 73ce859a63c2b48729477337591566ab, type: 3}
   cargoPrefab: {fileID: 6383477158272724285, guid: 4e031d690da8f744fa50feeaa869f708, type: 3}
   languagePanel: {fileID: 905890603}
+  levelsPanel: {fileID: 0}
   startPanel: {fileID: 297775274}
   startTextPanel: {fileID: 2141820983}
   pausePanel: {fileID: 112274874}
@@ -3498,6 +3499,7 @@ MonoBehaviour:
   score: 0
   scoreToWin: 5
   lifes: 0
+  startLifes: 0
   isPaused: 0
   isStarted: 0
 --- !u!114 &904106093

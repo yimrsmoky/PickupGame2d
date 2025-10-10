@@ -7890,7 +7890,7 @@ MonoBehaviour:
   score: 0
   scoreToWin: 5
   lifes: 0
-  startLifes: 0
+  startLifes: 5
   isPaused: 0
   isStarted: 0
 --- !u!114 &904106093

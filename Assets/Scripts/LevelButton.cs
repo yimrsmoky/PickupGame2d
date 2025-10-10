@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour
 {
@@ -33,12 +34,12 @@ public class LevelButton : MonoBehaviour
     {
         GameManager.Instance.SelectedLevel = levelNumber;
 
-        PlayerPrefs.SetInt("last_selected_level", levelNumber);
+        PlayerPrefs.SetInt("last_selected_level", levelNumber - 1);
         PlayerPrefs.Save();
-
-        UpdateAllLevelButtons();
+        SceneManager.LoadScene(PlayerPrefs.GetInt("last_selected_level"));
+        GameManager.Instance.UpdateAllLevelButtons();
     }
-    void UpdateAppearance()
+    public void UpdateAppearance()
     {
         int unlockedLevel = PlayerPrefs.GetInt("unlocked_level", 1);
         bool isUnlocked = levelNumber <= unlockedLevel;
@@ -56,14 +57,6 @@ public class LevelButton : MonoBehaviour
         {
             buttonImage.color = lockedColor;
 
-        }
-    }
-    public void UpdateAllLevelButtons()
-    {
-        LevelButton[] allButtons = FindObjectsByType<LevelButton>(sortMode: FindObjectsSortMode.None);
-        foreach (LevelButton btn in allButtons)
-        {
-            btn.UpdateAppearance();
         }
     }
 }

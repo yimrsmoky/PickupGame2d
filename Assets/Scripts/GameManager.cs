@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     private LocalizeStringEvent localizeEvent;
-    private LevelButton levelButton;
+    private LevelButton[] levelButton;
     public int SelectedLevel { get; set; } = 1;
 
     private Transform[] spawnPoints;
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public int scoreToWin;
     public int lifes;
-    public int startLifes;
+    [SerializeField] private int startLifes;
 
     public bool isPaused = true;
     public bool isStarted;
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            LoadCurrentLevelOnRun();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -83,11 +84,11 @@ public class GameManager : MonoBehaviour
         }
 #endif
 
-        //SceneManager.LoadScene(PlayerPrefs.GetInt("last_selected_level"));
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         audioSource = GameObject.FindFirstObjectByType<AudioSource>();
+        levelButton = FindObjectsByType<LevelButton>(sortMode: FindObjectsSortMode.None);
         //playerController = FindFirstObjectByType<PlayerController>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
@@ -99,10 +100,11 @@ public class GameManager : MonoBehaviour
         stageNumber = SceneManager.GetActiveScene().buildIndex + 1;
         localizeEvent = scoreText.GetComponent<LocalizeStringEvent>();
 
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            StartGame();
-        }
+    }
+    void LoadCurrentLevelOnRun()
+    {
+        //if (SceneManager.GetActiveScene().buildIndex != 0)
+        SceneManager.LoadScene(PlayerPrefs.GetInt("last_selected_level"));
     }
     public void StartGame()
     {
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator StartGameWithDelay()
     {
+        yield return new WaitForEndOfFrame();
         startTextPanel.gameObject.SetActive(true);
         audioSource.PlayOneShot(startSound);
         yield return new WaitForSeconds(1.25f);
@@ -249,7 +252,7 @@ public class GameManager : MonoBehaviour
         startPanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);
 
-        levelButton.UpdateAllLevelButtons();
+        UpdateAllLevelButtons();
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
@@ -262,6 +265,14 @@ public class GameManager : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(levelCompletedSound);
     }
+    public void UpdateAllLevelButtons()
+    {
+        LevelButton[] allButtons = FindObjectsByType<LevelButton>(sortMode: FindObjectsSortMode.None);
+        foreach (LevelButton btn in allButtons)
+        {
+            btn.UpdateAppearance();
+        }
+    }
     public void CompleteLevel(int level)
     {
         int unlocked = PlayerPrefs.GetInt("unlocked_level", 1);
@@ -270,11 +281,24 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("unlocked_level", level + 1);
             PlayerPrefs.Save();
         }
+        if (stageNumber != 30)
+        {
+            PlayerPrefs.SetInt("last_selected_level", level);
+            PlayerPrefs.Save();
+        }
+        UpdateAllLevelButtons();
     }
     public void ToNextLevel()
     {
+        isStarted = false;
+        isPaused = true;
+
         levelCompletedPanel.gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        startPanel.gameObject.SetActive(true);
+
+        if (stageNumber != 29)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     void HideExcessUI()
     {
