@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip normalMotorSound;
     public AudioClip boostedMotorSound;
 
-    [SerializeField] private float speed = 1f;
-    [SerializeField] private float normalSpeed = 1f;
-    [SerializeField] private float boostedSpeed = 2f;
+    [SerializeField] private float speed;
+    [SerializeField] private float normalSpeed;
+    [SerializeField] private float boostedSpeed;
     private bool isBoosted;
 
     void Start()

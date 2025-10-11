@@ -37,7 +37,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6306169947818557684
   - m_Id: 912893206528
-    m_Localized: "\u0442\u043E\u043B\u0430\u043C: {score-component.score}"
+    m_Localized: "\u0442\u043E\u043B\u0430\u043C: {score-component.score}/{score-component.scoreToWin}"
     m_Metadata:
       m_Items:
       - rid: 6306169947818557684
@@ -54,7 +54,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1187787890688
-    m_Localized: "\u0442l\u0435\u0445\u044C\u0430\u0439\u043E\u0433l\u0430 \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+    m_Localized: "\u04341\u0430\u0445\u043E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1175697174093824
+    m_Localized: "\u0445\u0430: {time-component.gameTimerString}"
+    m_Metadata:
+      m_Items:
+      - rid: 6306169947818557684
+  - m_Id: 1186112104882176
+    m_Localized: "\u0445\u0430 \u0447\u0430\u043A\u0445\u044A\u044F\u043B\u043B\u0430\u0440"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1186267709366272
+    m_Localized: "\u043C\u0430\u0448\u0435\u043D \u0439\u0438\u0439\u0445\u0430\u0440"
     m_Metadata:
       m_Items: []
   references:
@@ -67,3 +80,4 @@ MonoBehaviour:
         m_SharedEntries:
         - id: 710035693568
         - id: 912893206528
+        - id: 1175697174093824

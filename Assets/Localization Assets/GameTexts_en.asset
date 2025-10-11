@@ -37,7 +37,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6306169947818557683
   - m_Id: 912893206528
-    m_Localized: 'progress: {score-component.score}'
+    m_Localized: 'progress: {score-component.score}/{score-component.scoreToWin}'
     m_Metadata:
       m_Items:
       - rid: 6306169947818557683
@@ -54,7 +54,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1187787890688
-    m_Localized: next level
+    m_Localized: next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1175697174093824
+    m_Localized: 'time: {time-component.gameTimerString}'
+    m_Metadata:
+      m_Items:
+      - rid: 6306169947818557683
+  - m_Id: 1186112104882176
+    m_Localized: time out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1186267709366272
+    m_Localized: car destroyed
     m_Metadata:
       m_Items: []
   references:
@@ -67,3 +80,4 @@ MonoBehaviour:
         m_SharedEntries:
         - id: 710035693568
         - id: 912893206528
+        - id: 1175697174093824

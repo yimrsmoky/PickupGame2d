@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private LocalizeStringEvent localizeEvent;
+    private LocalizeStringEvent timerLocalizeEvent;
+    private LocalizeStringEvent scoreLocalizeEvent;
     private LevelButton[] levelButton;
     public int SelectedLevel { get; set; } = 1;
 
@@ -45,18 +46,26 @@ public class GameManager : MonoBehaviour
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameTimerText;
     public TextMeshProUGUI stageText;
+    public TextMeshProUGUI carDestroyedText;
+    public TextMeshProUGUI timeOutText;
 
     private float distanceToCar = 2f;
     private float respawnBlinkTime = 1.5f;
     private float respawnBlinkInterval = 0.1f;
-    public float gameTimer;
+    private float gameTimer;
+    [SerializeField] private float levelTime;
     public int stageNumber;
+    public int stageIndex;
     public int score = 0;
     public int scoreToWin;
     public int lifes;
     [SerializeField] private int startLifes;
 
+    public string gameTimerString;
+
+    bool timerStarted;
     public bool isPaused = true;
     public bool isStarted;
     void Awake()
@@ -85,6 +94,21 @@ public class GameManager : MonoBehaviour
 #endif
 
     }
+    private void Update()
+    {
+        if (timerStarted)
+        {
+            gameTimer -= Time.deltaTime;
+
+            if (gameTimer <= 0f)
+            {
+                gameTimer = 0f;
+                GameOver("time_out");
+            }
+
+            UpdateTimerText();
+        }
+    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         audioSource = GameObject.FindFirstObjectByType<AudioSource>();
@@ -98,25 +122,160 @@ public class GameManager : MonoBehaviour
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
         stageNumber = SceneManager.GetActiveScene().buildIndex + 1;
-        localizeEvent = scoreText.GetComponent<LocalizeStringEvent>();
+        stageIndex = SceneManager.GetActiveScene().buildIndex;
+        timerLocalizeEvent = gameTimerText.GetComponent<LocalizeStringEvent>();
+        scoreLocalizeEvent = scoreText.GetComponent<LocalizeStringEvent>();
 
+        SelectedLevel = stageNumber;
+        PrepareLevelSettings(stageNumber);
     }
     void LoadCurrentLevelOnRun()
     {
-        //if (SceneManager.GetActiveScene().buildIndex != 0)
-        SceneManager.LoadScene(PlayerPrefs.GetInt("last_selected_level"));
+        if (PlayerPrefs.HasKey("last_selected_level"))
+        {
+            int savedLevel = PlayerPrefs.GetInt("last_selected_level");
+
+            SelectedLevel = savedLevel;
+            SceneManager.LoadScene(savedLevel - 1);
+        }
+    }
+    void PrepareLevelSettings(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                levelTime = 30f;
+                scoreToWin = 5;
+                break;
+            case 2:
+                levelTime = 35f;
+                scoreToWin = 6;
+                break;
+            case 3:
+                levelTime = 40f;
+                scoreToWin = 7;
+                break;
+            case 4:
+                levelTime = 45f;
+                scoreToWin = 8;
+                break;
+            case 5:
+                levelTime = 50f;
+                scoreToWin = 9;
+                break;
+            case 6:
+                levelTime = 55f;
+                scoreToWin = 10;
+                break;
+            case 7:
+                levelTime = 60f;
+                scoreToWin = 11;
+                break;
+            case 8:
+                levelTime = 65f;
+                scoreToWin = 12;
+                break;
+            case 9:
+                levelTime = 70f;
+                scoreToWin = 13;
+                break;
+            case 10:
+                levelTime = 75f;
+                scoreToWin = 14;
+                break;
+            case 11:
+                levelTime = 80f;
+                scoreToWin = 15;
+                break;
+            case 12:
+                levelTime = 85f;
+                scoreToWin = 16;
+                break;
+            case 13:
+                levelTime = 90f;
+                scoreToWin = 17;
+                break;
+            case 14:
+                levelTime = 95f;
+                scoreToWin = 18;
+                break;
+            case 15:
+                levelTime = 100f;
+                scoreToWin = 19;
+                break;
+            case 16:
+                levelTime = 105f;
+                scoreToWin = 20;
+                break;
+            case 17:
+                levelTime = 110f;
+                scoreToWin = 21;
+                break;
+            case 18:
+                levelTime = 115f;
+                scoreToWin = 22;
+                break;
+            case 19:
+                levelTime = 120f;
+                scoreToWin = 23;
+                break;
+            case 20:
+                levelTime = 125f;
+                scoreToWin = 24;
+                break;
+            case 21:
+                levelTime = 135f;
+                scoreToWin = 25;
+                break;
+            case 22:
+                levelTime = 140f;
+                scoreToWin = 26;
+                break;
+            case 23:
+                levelTime = 145f;
+                scoreToWin = 27;
+                break;
+            case 24:
+                levelTime = 150f;
+                scoreToWin = 28;
+                break;
+            case 25:
+                levelTime = 155f;
+                scoreToWin = 29;
+                break;
+            case 26:
+                levelTime = 160f;
+                scoreToWin = 30;
+                break;
+            case 27:
+                levelTime = 165f;
+                scoreToWin = 31;
+                break;
+            case 28:
+                levelTime = 170f;
+                scoreToWin = 32;
+                break;
+            case 29:
+                levelTime = 175f;
+                scoreToWin = 33;
+                break;
+            case 30:
+                levelTime = 180f;
+                scoreToWin = 34;
+                break;
+        }
     }
     public void StartGame()
     {
         isPaused = false;
 
+        gameTimer = levelTime;
         lifes = startLifes;
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         startPanel.gameObject.SetActive(false);
 
         ShowExcessUI();
 
-        //stageText.text = $"{sceneIndex + 1}/30";
         lifesText.text = $"{lifes}";
 
         SpawnCargo();
@@ -132,6 +291,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.25f);
         startTextPanel.gameObject.SetActive(false);
         isStarted = true;
+        timerStarted = true;
     }
     public void SpawnCargo()
     {
@@ -157,10 +317,17 @@ public class GameManager : MonoBehaviour
             currentCargo = Instantiate(cargoPrefab, validSpawnPoints[randomIndex].position, Quaternion.identity);
         }
     }
+    void UpdateTimerText()
+    {
+        int minutes = Mathf.FloorToInt(gameTimer / 60);
+        int seconds = Mathf.FloorToInt(gameTimer % 60);
+        gameTimerString = $"{minutes}:{seconds}";
+        timerLocalizeEvent.RefreshString();
+    }
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        localizeEvent.RefreshString();
+        scoreLocalizeEvent.RefreshString();
     }
     public void UpdateLifes(int lifesToRemove)
     {
@@ -190,7 +357,7 @@ public class GameManager : MonoBehaviour
         audioSource.PlayOneShot(crashSound);
         if (lifes == 1)
         {
-            GameOver();
+            GameOver("car_destroyed");
         }
         else
         {
@@ -233,11 +400,16 @@ public class GameManager : MonoBehaviour
         }
         carSprRenderer.enabled = true;
     }
-    public void GameOver()
+    public void GameOver(string reason)
     {
+        timerStarted = false;
         isPaused = true;
         gameOverPanel.gameObject.SetActive(true);
         HideExcessUI();
+        gameTimerText.gameObject.SetActive(true);
+        if (reason == "time_out") timeOutText.gameObject.SetActive(true);
+        if (reason == "car_destroyed") carDestroyedText.gameObject.SetActive(true);
+
         audioSource.Stop();
         audioSource.PlayOneShot(gameOverSound);
         Time.timeScale = 0f;
@@ -245,20 +417,25 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         isStarted = false;
+        timerStarted = false;
         trunkBoxSprRenderer.enabled = false;
         lifesImg.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(false);
+        gameTimerText.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
+        timeOutText.gameObject.SetActive(false);
+        carDestroyedText.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
 
         UpdateAllLevelButtons();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(stageNumber - 1);
         Time.timeScale = 1f;
     }
     public void LevelCompleted()
     {
         isStarted = false;
+        timerStarted = false;
         levelCompletedPanel.gameObject.SetActive(true);
         HideExcessUI();
         CompleteLevel(stageNumber);
@@ -283,8 +460,10 @@ public class GameManager : MonoBehaviour
         }
         if (stageNumber != 30)
         {
-            PlayerPrefs.SetInt("last_selected_level", level);
+            PlayerPrefs.SetInt("last_selected_level", level + 1);
             PlayerPrefs.Save();
+
+            SelectedLevel = level + 1;
         }
         UpdateAllLevelButtons();
     }
@@ -305,10 +484,12 @@ public class GameManager : MonoBehaviour
         pauseButton.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(false);
         lifesImg.gameObject.SetActive(false);
+        gameTimerText.gameObject.SetActive(false);
     }
     void ShowExcessUI()
     {
         pauseButton.gameObject.SetActive(true);
+        gameTimerText.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(true);
         lifesImg.gameObject.SetActive(true);
     }

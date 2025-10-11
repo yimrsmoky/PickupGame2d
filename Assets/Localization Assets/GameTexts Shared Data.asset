@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: next_level
     m_Metadata:
       m_Items: []
+  - m_Id: 1175697174093824
+    m_Key: time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1186112104882176
+    m_Key: time_out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1186267709366272
+    m_Key: car_destroyed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

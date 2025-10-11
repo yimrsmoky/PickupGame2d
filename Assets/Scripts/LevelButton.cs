@@ -34,9 +34,9 @@ public class LevelButton : MonoBehaviour
     {
         GameManager.Instance.SelectedLevel = levelNumber;
 
-        PlayerPrefs.SetInt("last_selected_level", levelNumber - 1);
+        PlayerPrefs.SetInt("last_selected_level", levelNumber);
         PlayerPrefs.Save();
-        SceneManager.LoadScene(PlayerPrefs.GetInt("last_selected_level"));
+        SceneManager.LoadScene(levelNumber - 1);
         GameManager.Instance.UpdateAllLevelButtons();
     }
     public void UpdateAppearance()
