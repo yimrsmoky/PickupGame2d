@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
 
     private LocalizeStringEvent timerLocalizeEvent;
     private LocalizeStringEvent scoreLocalizeEvent;
-    private LevelButton[] levelButton;
+
+    private LevelButton[] allLevelButtonComponents;
     public int SelectedLevel { get; set; } = 1;
 
     private Transform[] spawnPoints;
@@ -34,9 +35,10 @@ public class GameManager : MonoBehaviour
     private GameObject spawnPointsContainer;
     public GameObject cargoPrefab;
     private GameObject currentCargo;
-
+ 
     public GameObject languagePanel;
     public GameObject levelsPanel;
+    public GameObject levelGrid;
     public GameObject startPanel;
     public GameObject startTextPanel;
     public GameObject pausePanel;
@@ -112,7 +114,6 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         audioSource = GameObject.FindFirstObjectByType<AudioSource>();
-        levelButton = FindObjectsByType<LevelButton>(sortMode: FindObjectsSortMode.None);
         //playerController = FindFirstObjectByType<PlayerController>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
@@ -428,7 +429,6 @@ public class GameManager : MonoBehaviour
         carDestroyedText.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
 
-        UpdateAllLevelButtons();
         SceneManager.LoadScene(stageNumber - 1);
         Time.timeScale = 1f;
     }
@@ -444,10 +444,17 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateAllLevelButtons()
     {
-        LevelButton[] allButtons = FindObjectsByType<LevelButton>(sortMode: FindObjectsSortMode.None);
-        foreach (LevelButton btn in allButtons)
+        // œ≈–≈»Õ»÷»¿À»«»–”≈Ã  ÕŒœ »  ¿∆ƒ€… –¿«
+        allLevelButtonComponents = FindObjectsByType<LevelButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        Debug.Log($"Found {allLevelButtonComponents.Length} level buttons to update");
+
+        foreach (var btn in allLevelButtonComponents)
         {
-            btn.UpdateAppearance();
+            if (btn != null)
+            {
+                btn.UpdateAppearance();
+            }
         }
     }
     public void CompleteLevel(int level)
@@ -465,7 +472,7 @@ public class GameManager : MonoBehaviour
 
             SelectedLevel = level + 1;
         }
-        UpdateAllLevelButtons();
+        Debug.Log($"unlocked {PlayerPrefs.GetInt("unlocked_level")} selected {PlayerPrefs.GetInt("last_selected_level")}");
     }
     public void ToNextLevel()
     {
@@ -507,6 +514,7 @@ public class GameManager : MonoBehaviour
     {
         startPanel.gameObject.SetActive(false);
         levelsPanel.gameObject.SetActive(true);
+        UpdateAllLevelButtons();
     }
     public void CloseLevelsPanel()
     {
