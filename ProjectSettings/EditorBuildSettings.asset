@@ -35,6 +35,66 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_1_10.unity
     guid: e7fd8486d74066844804500d5b2c91a7
+  - enabled: 1
+    path: Assets/Scenes/Level_2_11.unity
+    guid: 455da15fa52fd7245804b64581ad8ecc
+  - enabled: 1
+    path: Assets/Scenes/Level_2_12.unity
+    guid: 1e75372dba667854b9be2bcfb00167b0
+  - enabled: 1
+    path: Assets/Scenes/Level_2_13.unity
+    guid: 0e50c03b1b622d24f8b26f654a8bc2a6
+  - enabled: 1
+    path: Assets/Scenes/Level_2_14.unity
+    guid: de0b3369ecffa134f9aa299379921306
+  - enabled: 1
+    path: Assets/Scenes/Level_2_15.unity
+    guid: 0bf231e47d0b6214ea6ad52fbb17ac32
+  - enabled: 1
+    path: Assets/Scenes/Level_2_16.unity
+    guid: 78fff4514d16394418b4645699d5eaf0
+  - enabled: 1
+    path: Assets/Scenes/Level_2_17.unity
+    guid: 92f76b1a59e3d4b408b79343e6c6d658
+  - enabled: 1
+    path: Assets/Scenes/Level_2_18.unity
+    guid: 7be434285b26e334cb04068be2ea2637
+  - enabled: 1
+    path: Assets/Scenes/Level_2_19.unity
+    guid: c9459d7f3e384ab4fa8a52b9877fe8e3
+  - enabled: 1
+    path: Assets/Scenes/Level_2_20.unity
+    guid: 2221d5fc6019efe40a9aa5709050fbe1
+  - enabled: 1
+    path: Assets/Scenes/Level_3_21.unity
+    guid: 14c7f91fa64df4f4a8710c7c22d038c3
+  - enabled: 1
+    path: Assets/Scenes/Level_3_22.unity
+    guid: 25e4fe1b949953142a9eae086bf387e5
+  - enabled: 1
+    path: Assets/Scenes/Level_3_23.unity
+    guid: 623316db611949a4b8e7a25d811ae603
+  - enabled: 1
+    path: Assets/Scenes/Level_3_24.unity
+    guid: 900571d8682914e4da0b1a1e8f42ebf0
+  - enabled: 1
+    path: Assets/Scenes/Level_3_25.unity
+    guid: ca777747e3569644d98552446b8509f6
+  - enabled: 1
+    path: Assets/Scenes/Level_3_26.unity
+    guid: fec9a738113af19429533d9507788741
+  - enabled: 1
+    path: Assets/Scenes/Level_3_27.unity
+    guid: a7c85d6a3ff535a4caa83c1ee70195b1
+  - enabled: 1
+    path: Assets/Scenes/Level_3_28.unity
+    guid: 922d8999560aa834797cada46f010b5d
+  - enabled: 1
+    path: Assets/Scenes/Level_3_29.unity
+    guid: 6e6223059e732c0498e93757a3f04018
+  - enabled: 1
+    path: Assets/Scenes/Level_3_30.unity
+    guid: d43f43aa701773a4eb0f0302accc2c8c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 23727fe2e5907a548a5fa17e1ff843d8, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 89f1b2e57cf307845a0a0e3011a37b91, type: 2}

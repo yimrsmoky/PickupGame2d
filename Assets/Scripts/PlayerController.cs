@@ -9,12 +9,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 startTouchPosition; //стартовая позиция касания
     private Vector2 endTouchPosition; //конечная позиция касания
     //private bool isDragging = false; //палец на экране?
-    private float swipeThreshold = 100f; // эггара кеззигаг1а хьокам д1ахьакха беза моттиг
+    private float swipeThreshold = 50f; // эггара кеззигаг1а хьокам д1ахьакха беза моттиг
 
     private Camera cam;
     private float screenHeight;
     private float screenWidth;
-    public float offset = 1f;
+    public float offset = 0.5f;
     private float leftBound, rightBound, topBound, bottomBound;
 
     private AudioSource carAudioSource;

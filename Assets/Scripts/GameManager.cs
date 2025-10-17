@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public AudioClip gameOverSound;
     public AudioClip startSound;
     public AudioClip levelCompletedSound;
+    public AudioClip gameCompletedSound;
     public AudioClip crashSound;
     public AudioClip pickupSound;
 
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject gameOverPanel;
     public GameObject levelCompletedPanel;
+    public GameObject gameCompletedPanel;
     public Button pauseButton;
     public Image lifesImg;
     public TextMeshProUGUI lifesText;
@@ -54,16 +56,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI timeOutText;
 
     private float distanceToCar = 2f;
-    private float respawnBlinkTime = 1.5f;
-    private float respawnBlinkInterval = 0.1f;
+    private float respawnBlinkTime = 0.5f;
+    private float respawnBlinkInterval = 0.05f;
     private float gameTimer;
     [SerializeField] private float levelTime;
     public int stageNumber;
     public int stageIndex;
     public int score = 0;
     public int scoreToWin;
-    public int lifes;
-    [SerializeField] private int startLifes;
+    private int lifes;
+    public int startLifes;
 
     public string gameTimerString;
 
@@ -146,136 +148,166 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 levelTime = 30f;
+                startLifes = 5;
                 scoreToWin = 5;
                 break;
             case 2:
                 levelTime = 35f;
+                startLifes = 5;
                 scoreToWin = 6;
                 break;
             case 3:
                 levelTime = 40f;
+                startLifes = 5;
                 scoreToWin = 7;
                 break;
             case 4:
                 levelTime = 45f;
+                startLifes = 5;
                 scoreToWin = 8;
                 break;
             case 5:
                 levelTime = 50f;
+                startLifes = 5;
                 scoreToWin = 9;
                 break;
             case 6:
                 levelTime = 55f;
+                startLifes = 5;
                 scoreToWin = 10;
                 break;
             case 7:
                 levelTime = 60f;
+                startLifes = 5;
                 scoreToWin = 11;
                 break;
             case 8:
                 levelTime = 65f;
+                startLifes = 5;
                 scoreToWin = 12;
                 break;
             case 9:
                 levelTime = 70f;
+                startLifes = 5;
                 scoreToWin = 13;
                 break;
             case 10:
                 levelTime = 75f;
+                startLifes = 5;
                 scoreToWin = 14;
                 break;
             case 11:
                 levelTime = 80f;
+                startLifes = 7;
                 scoreToWin = 15;
                 break;
             case 12:
                 levelTime = 85f;
-                scoreToWin = 16;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 13:
                 levelTime = 90f;
-                scoreToWin = 17;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 14:
                 levelTime = 95f;
-                scoreToWin = 18;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 15:
                 levelTime = 100f;
-                scoreToWin = 19;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 16:
                 levelTime = 105f;
-                scoreToWin = 20;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 17:
                 levelTime = 110f;
-                scoreToWin = 21;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 18:
                 levelTime = 115f;
-                scoreToWin = 22;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 19:
                 levelTime = 120f;
-                scoreToWin = 23;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 20:
-                levelTime = 125f;
-                scoreToWin = 24;
+                levelTime = 120f;
+                startLifes = 7;
+                scoreToWin = 15;
                 break;
             case 21:
-                levelTime = 135f;
-                scoreToWin = 25;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 22:
-                levelTime = 140f;
-                scoreToWin = 26;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 23:
-                levelTime = 145f;
-                scoreToWin = 27;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 24:
-                levelTime = 150f;
-                scoreToWin = 28;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 25:
-                levelTime = 155f;
-                scoreToWin = 29;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 26:
-                levelTime = 160f;
-                scoreToWin = 30;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 27:
-                levelTime = 165f;
-                scoreToWin = 31;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 28:
-                levelTime = 170f;
-                scoreToWin = 32;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 29:
-                levelTime = 175f;
-                scoreToWin = 33;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 15;
                 break;
             case 30:
-                levelTime = 180f;
-                scoreToWin = 34;
+                levelTime = 120f;
+                startLifes = 10;
+                scoreToWin = 1;
                 break;
         }
     }
     public void StartGame()
     {
-        isPaused = false;
+        //isPaused = false;
 
         gameTimer = levelTime;
         lifes = startLifes;
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         startPanel.gameObject.SetActive(false);
 
-        ShowExcessUI();
+        //ShowExcessUI();
 
         lifesText.text = $"{lifes}";
 
@@ -291,7 +323,9 @@ public class GameManager : MonoBehaviour
         audioSource.PlayOneShot(startSound);
         yield return new WaitForSeconds(1.25f);
         startTextPanel.gameObject.SetActive(false);
+        isPaused = false;
         isStarted = true;
+        ShowExcessUI();
         timerStarted = true;
     }
     public void SpawnCargo()
@@ -346,7 +380,8 @@ public class GameManager : MonoBehaviour
 
         if (score == scoreToWin)
         {
-            LevelCompleted();
+            if (stageIndex == 29) GameCompleted();
+            else LevelCompleted();
         }
         else
         {
@@ -428,6 +463,7 @@ public class GameManager : MonoBehaviour
         timeOutText.gameObject.SetActive(false);
         carDestroyedText.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
+        gameCompletedPanel.gameObject.SetActive(false);
 
         SceneManager.LoadScene(stageNumber - 1);
         Time.timeScale = 1f;
@@ -436,6 +472,7 @@ public class GameManager : MonoBehaviour
     {
         isStarted = false;
         timerStarted = false;
+
         levelCompletedPanel.gameObject.SetActive(true);
         HideExcessUI();
         CompleteLevel(stageNumber);
@@ -465,7 +502,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("unlocked_level", level + 1);
             PlayerPrefs.Save();
         }
-        if (stageNumber != 30)
+        if (stageIndex != 29)
         {
             PlayerPrefs.SetInt("last_selected_level", level + 1);
             PlayerPrefs.Save();
@@ -530,5 +567,15 @@ public class GameManager : MonoBehaviour
     {
         // ¬озвращает true если игра запущена впервые
         return !PlayerPrefs.HasKey("game_launched_before");
+    }
+    void GameCompleted()
+    {
+        isStarted = false;
+        timerStarted = false;
+
+        gameCompletedPanel.gameObject.SetActive(true);
+        HideExcessUI();
+        audioSource.Stop();
+        audioSource.PlayOneShot(gameCompletedSound);
     }
 }
