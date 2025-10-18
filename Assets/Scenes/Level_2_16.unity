@@ -8012,6 +8012,7 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: 75b39da30dad119499523a6155d6deb1, type: 3}
   startSound: {fileID: 8300000, guid: 4041f18c54ee33cf89066ed481236e96, type: 3}
   levelCompletedSound: {fileID: 8300000, guid: 89ae9828e2f8913779b44d7d553bad9a, type: 3}
+  gameCompletedSound: {fileID: 0}
   crashSound: {fileID: 8300000, guid: 63abb224d3a104d0a9de133310638405, type: 3}
   pickupSound: {fileID: 8300000, guid: 73ce859a63c2b48729477337591566ab, type: 3}
   cargoPrefab: {fileID: 6383477158272724285, guid: 4e031d690da8f744fa50feeaa869f708, type: 3}
@@ -8023,6 +8024,7 @@ MonoBehaviour:
   pausePanel: {fileID: 112274874}
   gameOverPanel: {fileID: 1614878210}
   levelCompletedPanel: {fileID: 1814113695}
+  gameCompletedPanel: {fileID: 0}
   pauseButton: {fileID: 190668372}
   lifesImg: {fileID: 357203695}
   lifesText: {fileID: 1897303642}
@@ -8036,7 +8038,6 @@ MonoBehaviour:
   stageIndex: 0
   score: 0
   scoreToWin: 2
-  lifes: 0
   startLifes: 5
   gameTimerString: 
   isPaused: 0
@@ -15099,7 +15100,7 @@ Transform:
   m_GameObject: {fileID: 1828212847}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73, y: -1.74, z: 0}
+  m_LocalPosition: {x: 0.08, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -70,6 +70,14 @@ MonoBehaviour:
     m_Localized: car destroyed
     m_Metadata:
       m_Items: []
+  - m_Id: 3876314812309504
+    m_Localized: game completed!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3876556899147776
+    m_Localized: support the new projects
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

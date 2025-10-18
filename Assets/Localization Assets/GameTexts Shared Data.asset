@@ -63,6 +63,14 @@ MonoBehaviour:
     m_Key: car_destroyed
     m_Metadata:
       m_Items: []
+  - m_Id: 3876314812309504
+    m_Key: game_completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3876556899147776
+    m_Key: support_the_project
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

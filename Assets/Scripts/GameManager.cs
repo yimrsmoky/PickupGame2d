@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
         trunkBoxSprRenderer = GameObject.FindGameObjectWithTag("Wagon").GetComponent<SpriteRenderer>();
-        trunkBoxSprRenderer.enabled = false;
         carRespawnTransform = GameObject.Find("CarRespawnPoint").transform;
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
@@ -338,6 +337,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var point in spawnPoints)
         {
+            if (point == spawnPointsContainer.transform) continue;
             bool isTooCloseToPlayer = Vector2.Distance(point.transform.position, carTransform.position) < distanceToCar;
 
             if (!isTooCloseToPlayer)
@@ -376,7 +376,7 @@ public class GameManager : MonoBehaviour
         audioSource.PlayOneShot(pickupSound);
         AddScore(1);
         //box enabled
-        trunkBoxSprRenderer.enabled = true;
+        trunkBoxSprRenderer.color = Color.white;
 
         if (score == scoreToWin)
         {
@@ -399,7 +399,8 @@ public class GameManager : MonoBehaviour
         {
             UpdateLifes(1);
             //box disabled
-            trunkBoxSprRenderer.enabled = false;
+            Color color = Color.clear;
+            trunkBoxSprRenderer.color = color;
         }
     }
     public void PauseGame()
