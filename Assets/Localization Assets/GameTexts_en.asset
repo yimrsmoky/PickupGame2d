@@ -78,6 +78,10 @@ MonoBehaviour:
     m_Localized: support the new projects
     m_Metadata:
       m_Items: []
+  - m_Id: 3960284056969216
+    m_Localized: tap for boost
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

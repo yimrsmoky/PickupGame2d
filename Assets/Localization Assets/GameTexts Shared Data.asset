@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: support_the_project
     m_Metadata:
       m_Items: []
+  - m_Id: 3960284056969216
+    m_Key: tap_info
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

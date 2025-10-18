@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private SpriteRenderer trunkBoxSprRenderer;
 
     private AudioSource audioSource;
+    private AudioSource UIAudioSource;
 
     public AudioClip gameOverSound;
     public AudioClip startSound;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     public AudioClip gameCompletedSound;
     public AudioClip crashSound;
     public AudioClip pickupSound;
+    public AudioClip clickSound;
 
     private GameObject spawnPointsContainer;
     public GameObject cargoPrefab;
@@ -115,8 +117,8 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        audioSource = GameObject.FindFirstObjectByType<AudioSource>();
-        //playerController = FindFirstObjectByType<PlayerController>();
+        audioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        UIAudioSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
         trunkBoxSprRenderer = GameObject.FindGameObjectWithTag("Wagon").GetComponent<SpriteRenderer>();
@@ -293,7 +295,7 @@ public class GameManager : MonoBehaviour
             case 30:
                 levelTime = 120f;
                 startLifes = 10;
-                scoreToWin = 1;
+                scoreToWin = 15;
                 break;
         }
     }
@@ -578,5 +580,9 @@ public class GameManager : MonoBehaviour
         HideExcessUI();
         audioSource.Stop();
         audioSource.PlayOneShot(gameCompletedSound);
+    }
+    public void ButtonClickSound()
+    {
+       UIAudioSource.PlayOneShot(clickSound);
     }
 }
