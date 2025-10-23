@@ -60,7 +60,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1175697174093824
-    m_Localized: "\u0432\u0440\u0435\u043C\u044F: \n{time-component.gameTimerString}"
+    m_Localized: "\u0432\u0440\u0435\u043C\u044F: {time-component.gameTimerString}"
     m_Metadata:
       m_Items:
       - rid: 6306169947818557685

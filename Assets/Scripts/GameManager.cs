@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     private Transform carRespawnTransform;
 
     private SpriteRenderer carSprRenderer;
-    private SpriteRenderer trunkBoxSprRenderer;
 
     private AudioSource audioSource;
     private AudioSource UIAudioSource;
@@ -125,7 +124,6 @@ public class GameManager : MonoBehaviour
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
-        trunkBoxSprRenderer = GameObject.FindGameObjectWithTag("Wagon").GetComponent<SpriteRenderer>();
         carRespawnTransform = GameObject.Find("CarRespawnPoint").transform;
         spawnPointsContainer = GameObject.Find("SpawnPoints");
         spawnPoints = spawnPointsContainer.GetComponentsInChildren<Transform>();
@@ -375,15 +373,11 @@ public class GameManager : MonoBehaviour
     {
         lifes -= lifesToRemove;
         lifesText.text = $"{lifes}";
-
-        StartCoroutine(RespawnCarWithBlink());
     }
     public void CollectCargo()
     {
         audioSource.PlayOneShot(pickupSound);
         AddScore(1);
-        //box enabled
-        trunkBoxSprRenderer.color = Color.white;
 
         if (score == scoreToWin)
         {
@@ -398,7 +392,9 @@ public class GameManager : MonoBehaviour
     public void TouchingAnObstacle()
     {
         audioSource.PlayOneShot(crashSound);
-        playerController.Tap();
+
+        if (playerController.isBoosted) playerController.Tap();
+
         if (lifes == 1)
         {
             GameOver("car_destroyed");
@@ -406,9 +402,7 @@ public class GameManager : MonoBehaviour
         else
         {
             UpdateLifes(1);
-            //box disabled
-            Color color = Color.clear;
-            trunkBoxSprRenderer.color = color;
+            StartCoroutine(RespawnCarWithBlink());
         }
     }
     public void PauseGame()
@@ -463,7 +457,6 @@ public class GameManager : MonoBehaviour
     {
         isStarted = false;
         timerStarted = false;
-        trunkBoxSprRenderer.enabled = false;
         lifesImg.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(false);
         gameTimerText.gameObject.SetActive(false);
@@ -490,7 +483,6 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateAllLevelButtons()
     {
-        // œ≈–≈»Õ»÷»¿À»«»–”≈Ã  ÕŒœ »  ¿∆ƒ€… –¿«
         allLevelButtonComponents = FindObjectsByType<LevelButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         //Debug.Log($"Found {allLevelButtonComponents.Length} level buttons to update");
