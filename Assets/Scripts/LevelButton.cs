@@ -58,6 +58,6 @@ public class LevelButton : MonoBehaviour
             buttonImage.color = lockedColor;
 
         }
-        Debug.Log("buttonsUpdated");
+        //Degub.Log("Buttons Updated");
     }
 }

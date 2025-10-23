@@ -32,12 +32,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 710035693568
-    m_Localized: 'level: {stage-component.stageNumber}/30'
+    m_Localized: 'level: {stage-component.stageNumber} / 30'
     m_Metadata:
       m_Items:
       - rid: 6306169947818557683
   - m_Id: 912893206528
-    m_Localized: 'progress: {score-component.score}/{score-component.scoreToWin}'
+    m_Localized: "progress: \n{score-component.score} / {score-component.scoreToWin}"
     m_Metadata:
       m_Items:
       - rid: 6306169947818557683
@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1175697174093824
-    m_Localized: 'time: {time-component.gameTimerString}'
+    m_Localized: "time:\n {time-component.gameTimerString}"
     m_Metadata:
       m_Items:
       - rid: 6306169947818557683
@@ -78,8 +78,9 @@ MonoBehaviour:
     m_Localized: support the new projects
     m_Metadata:
       m_Items: []
-  - m_Id: 3960284056969216
-    m_Localized: tap for boost
+  - m_Id: 5701204129406976
+    m_Localized: "tap - boost / slow\n\nswipe - turn\n\n\nCollect the cargo\n before
+      the time runs out"
     m_Metadata:
       m_Items: []
   references:

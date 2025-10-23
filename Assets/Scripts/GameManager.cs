@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     private LocalizeStringEvent timerLocalizeEvent;
     private LocalizeStringEvent scoreLocalizeEvent;
 
+    private PlayerController playerController;
+
     private LevelButton[] allLevelButtonComponents;
     public int SelectedLevel { get; set; } = 1;
 
@@ -38,8 +40,9 @@ public class GameManager : MonoBehaviour
     private GameObject spawnPointsContainer;
     public GameObject cargoPrefab;
     private GameObject currentCargo;
- 
+
     public GameObject languagePanel;
+    public GameObject infoPanel;
     public GameObject levelsPanel;
     public GameObject levelGrid;
     public GameObject startPanel;
@@ -95,7 +98,7 @@ public class GameManager : MonoBehaviour
         if (IsFirstLaunch())
         {
             OpenLangPanel();
-            MarkAsLaunched();
+            //MarkAsLaunched();
         }
 #endif
 
@@ -119,6 +122,7 @@ public class GameManager : MonoBehaviour
     {
         audioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         UIAudioSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         carTransform = GameObject.FindGameObjectWithTag("Player").transform;
         carSprRenderer = carTransform.GetComponent<SpriteRenderer>();
         trunkBoxSprRenderer = GameObject.FindGameObjectWithTag("Wagon").GetComponent<SpriteRenderer>();
@@ -307,6 +311,7 @@ public class GameManager : MonoBehaviour
         lifes = startLifes;
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         startPanel.gameObject.SetActive(false);
+        infoPanel.gameObject.SetActive(false);
 
         //ShowExcessUI();
 
@@ -358,7 +363,7 @@ public class GameManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(gameTimer / 60);
         int seconds = Mathf.FloorToInt(gameTimer % 60);
-        gameTimerString = $"{minutes}:{seconds}";
+        gameTimerString = $"{minutes}:{seconds:00}";
         timerLocalizeEvent.RefreshString();
     }
     public void AddScore(int scoreToAdd)
@@ -393,6 +398,7 @@ public class GameManager : MonoBehaviour
     public void TouchingAnObstacle()
     {
         audioSource.PlayOneShot(crashSound);
+        playerController.Tap();
         if (lifes == 1)
         {
             GameOver("car_destroyed");
@@ -487,7 +493,7 @@ public class GameManager : MonoBehaviour
         // œ≈–≈»Õ»÷»¿À»«»–”≈Ã  ÕŒœ »  ¿∆ƒ€… –¿«
         allLevelButtonComponents = FindObjectsByType<LevelButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        Debug.Log($"Found {allLevelButtonComponents.Length} level buttons to update");
+        //Debug.Log($"Found {allLevelButtonComponents.Length} level buttons to update");
 
         foreach (var btn in allLevelButtonComponents)
         {
@@ -512,7 +518,7 @@ public class GameManager : MonoBehaviour
 
             SelectedLevel = level + 1;
         }
-        Debug.Log($"unlocked {PlayerPrefs.GetInt("unlocked_level")} selected {PlayerPrefs.GetInt("last_selected_level")}");
+        //Debug.Log($"unlocked {PlayerPrefs.GetInt("unlocked_level")} selected {PlayerPrefs.GetInt("last_selected_level")}");
     }
     public void ToNextLevel()
     {
@@ -549,6 +555,11 @@ public class GameManager : MonoBehaviour
     {
         languagePanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
+
+    }
+    public void OpenInfoPanel()
+    {
+        infoPanel.gameObject.SetActive(true);
     }
     public void OpenLevelsPanel()
     {
@@ -561,12 +572,12 @@ public class GameManager : MonoBehaviour
         levelsPanel.gameObject.SetActive(false);
         startPanel.gameObject.SetActive(true);
     }
-    void MarkAsLaunched()
+    public void MarkAsLaunched()
     {
         PlayerPrefs.SetInt("game_launched_before", 1);
         PlayerPrefs.Save();
     }
-    bool IsFirstLaunch()
+    public bool IsFirstLaunch()
     {
         // ¬ÓÁ‚‡˘‡ÂÚ true ÂÒÎË Ë„‡ Á‡ÔÛ˘ÂÌ‡ ‚ÔÂ‚˚Â
         return !PlayerPrefs.HasKey("game_launched_before");
@@ -583,6 +594,6 @@ public class GameManager : MonoBehaviour
     }
     public void ButtonClickSound()
     {
-       UIAudioSource.PlayOneShot(clickSound);
+        UIAudioSource.PlayOneShot(clickSound);
     }
 }

@@ -16,6 +16,15 @@ public class StartButton : MonoBehaviour
     public void OnPlayClick()
     {
         int selectedLevel = GameManager.Instance.SelectedLevel;
-        GameManager.Instance.StartGame();
+
+        if (GameManager.Instance.IsFirstLaunch())
+        {
+            GameManager.Instance.MarkAsLaunched();
+
+            GameManager.Instance.startPanel.gameObject.SetActive(false);
+            GameManager.Instance.OpenInfoPanel();
+        }
+        else                                       
+            GameManager.Instance.StartGame();
     }
 }

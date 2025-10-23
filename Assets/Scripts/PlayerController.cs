@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private float screenHeight;
     private float screenWidth;
-    public float offset = 0.5f;
+    public float offset = 0.1f;
     private float leftBound, rightBound, topBound, bottomBound;
 
     private AudioSource carAudioSource;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float normalSpeed;
     [SerializeField] private float boostedSpeed;
-    private bool isBoosted;
+    public bool isBoosted;
 
     void Start()
     {
@@ -138,16 +138,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             //клик
-                if (isBoosted)
-                {
-                    isBoosted = false;
-                    speed = normalSpeed;
-                }
-                else
-                {
-                    isBoosted = true;
-                    speed = boostedSpeed;
-                }
+            Tap();
         }
     }
     void MoveCarForward()
@@ -194,6 +185,19 @@ public class PlayerController : MonoBehaviour
         {
             carPos.y = bottomBound - offset;
             transform.position = carPos;
+        }
+    }
+    public void Tap()
+    {
+        if (isBoosted)
+        {
+            isBoosted = false;
+            speed = normalSpeed;
+        }
+        else
+        {
+            isBoosted = true;
+            speed = boostedSpeed;
         }
     }
 }
