@@ -428,6 +428,7 @@ public class GameManager : MonoBehaviour
     {
         float timer = 0f;
         carTransform.position = carRespawnTransform.position;
+        playerController.targetRotation = carRespawnTransform.rotation;
         carTransform.rotation = carRespawnTransform.rotation;
         while (timer < respawnBlinkTime)
         {
