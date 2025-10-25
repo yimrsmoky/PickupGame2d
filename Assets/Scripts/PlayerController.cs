@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float boostedSpeed;
 
     public Quaternion targetRotation;
+    private Quaternion swapRotation;
 
     public bool isBoosted;
 
@@ -100,6 +101,11 @@ public class PlayerController : MonoBehaviour
             ProcessSwipe();
         }
 
+        if (Input.GetKeyDown(KeyCode.UpArrow)) RotateCar(Quaternion.Euler(0, 0, 0));
+        if (Input.GetKeyDown(KeyCode.DownArrow)) RotateCar(Quaternion.Euler(0, 0, 180));
+        if (Input.GetKeyDown(KeyCode.RightArrow)) RotateCar(Quaternion.Euler(0, 0, -90));
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) RotateCar(Quaternion.Euler(0, 0, 90));
+
     }
     void ProcessSwipe()
     {
@@ -120,30 +126,29 @@ public class PlayerController : MonoBehaviour
 
             if (IsHorizontalSwipe)
             {
-                if (swipeDelta.x > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, -90)) != 180)
+                if (swipeDelta.x > 0)
                 {
-                    //transform.rotation = Quaternion.Euler(0, 0, -90);
-                    RotateCar(Quaternion.Euler(0, 0, -90));
+                    swapRotation = Quaternion.Euler(0, 0, -90);
                 }
-                if (swipeDelta.x < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 90)) != 180)
+                if (swipeDelta.x < 0)
                 {
-                    //transform.rotation = Quaternion.Euler(0, 0, 90);
-                    RotateCar(Quaternion.Euler(0, 0, 90));
+                    swapRotation = Quaternion.Euler(0, 0, 90);
                 }
             }
             else
             {
-                if (swipeDelta.y > 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 0)) != 180)
+                if (swipeDelta.y > 0)
                 {
-                    //transform.rotation = Quaternion.Euler(0, 0, 0);
-                    RotateCar(Quaternion.Euler(0, 0, 0));
+                    swapRotation = Quaternion.Euler(0, 0, 0);
                 }
-                if (swipeDelta.y < 0 && Quaternion.Angle(transform.rotation, Quaternion.Euler(0, 0, 180)) != 180)
+                if (swipeDelta.y < 0)
                 {
-                    //transform.rotation = Quaternion.Euler(0, 0, 180);
-                    RotateCar(Quaternion.Euler(0, 0, 180));
+                    swapRotation = Quaternion.Euler(0, 0, 180);
                 }
             }
+
+            RotateCar(swapRotation);
+
         }
         else
         {

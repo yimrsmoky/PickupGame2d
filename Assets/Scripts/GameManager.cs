@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI carDestroyedText;
     public TextMeshProUGUI timeOutText;
 
-    private float distanceToCar = 2f;
+    private float distanceToCar = 0.5f;
     private float respawnBlinkTime = 0.5f;
     private float respawnBlinkInterval = 0.05f;
     private float gameTimer;
