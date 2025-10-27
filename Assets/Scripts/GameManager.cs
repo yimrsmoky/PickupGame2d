@@ -230,72 +230,72 @@ public class GameManager : MonoBehaviour
                 scoreToWin = 15;
                 break;
             case 17:
-                levelTime = 110f;
+                levelTime = 105f;
                 startLifes = 7;
                 scoreToWin = 15;
                 break;
             case 18:
-                levelTime = 115f;
+                levelTime = 105f;
                 startLifes = 7;
                 scoreToWin = 15;
                 break;
             case 19:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 7;
                 scoreToWin = 15;
                 break;
             case 20:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 7;
                 scoreToWin = 15;
                 break;
             case 21:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 22:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 23:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 24:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 25:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 26:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 27:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 28:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 29:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;
             case 30:
-                levelTime = 120f;
+                levelTime = 105f;
                 startLifes = 10;
                 scoreToWin = 15;
                 break;

@@ -15442,6 +15442,7 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: 75b39da30dad119499523a6155d6deb1, type: 3}
   startSound: {fileID: 8300000, guid: 4041f18c54ee33cf89066ed481236e96, type: 3}
   levelCompletedSound: {fileID: 8300000, guid: 89ae9828e2f8913779b44d7d553bad9a, type: 3}
+<<<<<<< HEAD
   gameCompletedSound: {fileID: 8300000, guid: 246d61d6d4b1de580a6a44d0d342ba58, type: 3}
   crashSound: {fileID: 8300000, guid: 63abb224d3a104d0a9de133310638405, type: 3}
   pickupSound: {fileID: 8300000, guid: 73ce859a63c2b48729477337591566ab, type: 3}
@@ -15465,6 +15466,31 @@ MonoBehaviour:
   stageText: {fileID: 1873560128}
   carDestroyedText: {fileID: 1531043648}
   timeOutText: {fileID: 1416659675}
+=======
+  gameCompletedSound: {fileID: 0}
+  crashSound: {fileID: 8300000, guid: 63abb224d3a104d0a9de133310638405, type: 3}
+  pickupSound: {fileID: 8300000, guid: 73ce859a63c2b48729477337591566ab, type: 3}
+  clickSound: {fileID: 0}
+  cargoPrefab: {fileID: 6383477158272724285, guid: 4e031d690da8f744fa50feeaa869f708, type: 3}
+  languagePanel: {fileID: 905890603}
+  infoPanel: {fileID: 0}
+  levelsPanel: {fileID: 539270160}
+  levelGrid: {fileID: 842236999}
+  startPanel: {fileID: 297775274}
+  startTextPanel: {fileID: 2141820983}
+  pausePanel: {fileID: 112274874}
+  gameOverPanel: {fileID: 1614878210}
+  levelCompletedPanel: {fileID: 1814113695}
+  gameCompletedPanel: {fileID: 0}
+  pauseButton: {fileID: 190668372}
+  lifesImg: {fileID: 357203695}
+  lifesText: {fileID: 1897303642}
+  scoreText: {fileID: 675943404}
+  gameTimerText: {fileID: 1175780855}
+  stageText: {fileID: 1924019371}
+  carDestroyedText: {fileID: 645627299}
+  timeOutText: {fileID: 498933852}
+>>>>>>> 12898a32832244d406a2f71fedb05059f2cf8816
   levelTime: 30
   stageNumber: 0
   stageIndex: 0
@@ -19735,11 +19761,19 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 1, y: -6, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
       m_TileSpriteIndex: 0
+=======
+  - first: {x: 0, y: -6, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+>>>>>>> 12898a32832244d406a2f71fedb05059f2cf8816
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -20277,6 +20311,7 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
+<<<<<<< HEAD
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 3e4ba7756f65c6d4ab2583f11d4d724b, type: 2}
   - m_RefCount: 88
@@ -20285,6 +20320,16 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 1878592897818529697, guid: f214eb6f8ef19a14aa01a60e4a658954, type: 3}
   - m_RefCount: 88
+=======
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 90
+    m_Data: {fileID: 11400000, guid: 3e272652bd839f043b1096a38ee8078e, type: 2}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 90
+>>>>>>> 12898a32832244d406a2f71fedb05059f2cf8816
     m_Data: {fileID: 1878592897818529697, guid: dadf9366ccfdca344b4c96b28c8cde3a, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 90
