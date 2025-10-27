@@ -106,9 +106,9 @@ MonoBehaviour:
   offset: 0.5
   normalMotorSound: {fileID: 8300000, guid: 414f0cd7f3c2e5a4b8fed7449936673c, type: 3}
   boostedMotorSound: {fileID: 8300000, guid: 741a89303c023a14fb7ac9171dcc2c0e, type: 3}
-  speed: 1
-  normalSpeed: 1
-  boostedSpeed: 3.5
+  speed: 1.5
+  normalSpeed: 1.5
+  boostedSpeed: 3
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   isBoosted: 0
 --- !u!82 &2131583489651127353
