@@ -474,6 +474,7 @@ public class GameManager : MonoBehaviour
     public void LevelCompleted()
     {
         isStarted = false;
+        isPaused = true;
         timerStarted = false;
 
         levelCompletedPanel.gameObject.SetActive(true);

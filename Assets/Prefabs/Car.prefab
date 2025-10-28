@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2723055991737611343}
   - component: {fileID: 2131583489651127353}
   - component: {fileID: 8489251602511255026}
-  - component: {fileID: 5563063497987349693}
+  - component: {fileID: 3789386385804585297}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -106,11 +106,14 @@ MonoBehaviour:
   offset: 0.5
   normalMotorSound: {fileID: 8300000, guid: 414f0cd7f3c2e5a4b8fed7449936673c, type: 3}
   boostedMotorSound: {fileID: 8300000, guid: 741a89303c023a14fb7ac9171dcc2c0e, type: 3}
+  driftSound: {fileID: 8300000, guid: cc7dba36f282ba4489b383fb923ffa84, type: 3}
   speed: 1.5
   normalSpeed: 1.5
   boostedSpeed: 3
+  rotationSpeed: 10
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   isBoosted: 0
+  isDrifting: 0
 --- !u!82 &2131583489651127353
 AudioSource:
   m_ObjectHideFlags: 0
@@ -235,7 +238,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &5563063497987349693
+--- !u!68 &3789386385804585297
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
