@@ -5101,6 +5101,7 @@ GameObject:
   - component: {fileID: 510456879}
   - component: {fileID: 510456878}
   - component: {fileID: 510456880}
+  - component: {fileID: 510456881}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5266,6 +5267,57 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &510456881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510456876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 6306170423479369804
+  references:
+    version: 2
+    RefIds:
+    - rid: 6306170423479369804
+      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 510456878}
+        m_TrackedProperties:
+          items:
+          - rid: 6306170423479369805
+          - rid: 6306170423479369806
+        m_UpdateType: 0
+    - rid: 6306170423479369805
+      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_PropertyPath: m_fontSize
+        m_VariantData:
+        - localeIdentifier:
+            m_Code: en
+          value: 50
+        - localeIdentifier:
+            m_Code: ing
+          value: 50
+        - localeIdentifier:
+            m_Code: ru
+          value: 50
+    - rid: 6306170423479369806
+      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_PropertyPath: m_fontSizeBase
+        m_VariantData:
+        - localeIdentifier:
+            m_Code: en
+          value: 58
+        - localeIdentifier:
+            m_Code: ing
+          value: 50
 --- !u!1 &518548671
 GameObject:
   m_ObjectHideFlags: 0

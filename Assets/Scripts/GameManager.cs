@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI carDestroyedText;
     public TextMeshProUGUI timeOutText;
 
-    private float distanceToCar = 0.5f;
+    private float distanceToCar = 0.6f;
     private float respawnBlinkTime = 0.5f;
     private float respawnBlinkInterval = 0.05f;
     private float gameTimer;
@@ -523,8 +523,10 @@ public class GameManager : MonoBehaviour
 
         startPanel.gameObject.SetActive(true);
 
-        if (stageNumber != 29)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (stageNumber != 30)
+            SceneManager.LoadScene(stageIndex + 1);
+        else 
+            SceneManager.LoadScene(stageIndex);
     }
     void HideExcessUI()
     {
