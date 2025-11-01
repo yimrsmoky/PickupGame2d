@@ -83,6 +83,10 @@ MonoBehaviour:
       the time runs out"
     m_Metadata:
       m_Items: []
+  - m_Id: 8399540313710592
+    m_Localized: vk group
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

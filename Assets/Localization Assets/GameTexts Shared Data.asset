@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Key: info_text
     m_Metadata:
       m_Items: []
+  - m_Id: 8399540313710592
+    m_Key: vk_group
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
