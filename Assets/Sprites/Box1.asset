@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: "ChatGPT Image 10 \u0430\u0432\u0433. 2025 \u0433., 14_52_20_0"
+  m_Name: Box1
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 1878592897818529697, guid: b545b7e698a70a145af2aeb89a29ef08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

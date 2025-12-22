@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 startTouchPosition; //стартовая позиция касания
     private Vector2 endTouchPosition; //конечная позиция касания
     //private bool isDragging = false; //палец на экране?
-    private float swipeThreshold = 50f; // эггара кеззигаг1а хьокам д1ахьакха беза моттиг
+    private float swipeThreshold = 50f; //чувствительность свайпа
 
     private Camera cam;
     private float screenHeight;
